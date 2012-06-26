@@ -3,4 +3,41 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 body {
     background: #333;
+    font: 14px/1.6 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+    .editor, .CodeMirror {
+        float:left;
+        width:80%;
+    }
+    .aside {
+        color: #ccc;
+        float:right;
+        width:20%;
+        text-align:right;
+        text-shadow:1px 1px 0 #333;
+    }
+        h1, .aside li {
+            padding-right:10px;
+        }
+        h1 {
+            font-size:150%;
+        }
+        .current {
+            background: #555;
+        }
+
+.toast-container {
+	position:fixed;
+	text-align: center;
+	background-color: #555;
+	padding:5px;
+	color:#ccc;
+    margin-top:10px;
+    text-shadow:1px 1px 0 #333;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 1px 1px 1px #111;
+	-moz-box-shadow: 0px 1px 1px 1px #111;
+	box-shadow: 0px 1px 1px 1px #111; 
 }

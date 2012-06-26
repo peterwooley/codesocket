@@ -7,11 +7,18 @@ html(lang="en")
     link(rel="stylesheet", href="/css/index.css")
   body(data-rc='#{program}')
     .container
-        .files
         textarea.editor
             | var express = require('express');
+        .aside
+            h1 #{title}
+            ul.files
+                - each file in files
+                    li #{file}
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
     script(src='/socket.io/socket.io.js')
     script(src="/codemirror/lib/codemirror.js")
+    script(src="/codemirror/mode/javascript/javascript.js")
+    script(src="/js/jwerty.js")
+    script(src="/toaster/jquery.toaster.min.js")
     script(src="/js/index.js")
 

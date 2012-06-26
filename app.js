@@ -1,6 +1,10 @@
-var express = require('express'),
+var fs = require('fs'),
+    path = require('path'),
+    express = require('express'),
     app = express.createServer(),
-    io = require('socket.io').listen(app);
+    io = require('socket.io').listen(app)
+    argv = require('optimist').argv,
+    dir = process.cwd();
 
 app.configure(function() {
     app.use(express.bodyParser({ keepExtensions: true }));
@@ -14,7 +18,27 @@ app.configure(function() {
 
 
 app.get('/:rc?', function(req, res){
-    res.render('index.jade', {program: req.params.rc || ""});
+    res.render('index.jade', {
+        files: fs.readdirSync(process.cwd() ).map(function(file) {
+            if(!fs.statSync(process.cwd()+'/'+file).isDirectory())
+                return file;
+        }),
+        title: process.cwd().split('/').slice(-1)[0],
+        program: req.params.rc || ""
+    });
+});
+
+app.get('/open/:file', function(req, res) {
+    res.send(fs.readFileSync(dir + '/' + req.params.file));
+});
+
+app.post('/save', function(req, res) {
+    if(req.body.file && req.body.contents) {
+        fs.writeFileSync(dir + "/" + req.body.file, req.body.contents);
+        res.send("File saved.");
+    } else {
+        res.send("File not saved.");
+    }
 });
 
 rc = {}
