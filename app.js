@@ -1,5 +1,6 @@
 var express = require('express'),
-    app = express.createServer();
+    app = express.createServer(),
+    io = require('socket.io').listen(app);
 
 app.configure(function() {
     app.use(express.bodyParser({ keepExtensions: true }));
@@ -12,9 +13,19 @@ app.configure(function() {
 });
 
 
-app.get('/', function(req, res){
-    res.render('index.jade');
+app.get('/:rc?', function(req, res){
+    res.render('index.jade', {program: req.params.rc || ""});
 });
+
+rc = {}
+rc.programs = io.of('/program')
+rc.flynn = io
+    .of('/flynn')
+    .on('connection', function(socket) {
+        socket.on('command', function(command) {
+            rc.programs.emit('command', command);
+        })
+    });
 
 app.listen(3000);
 

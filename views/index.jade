@@ -5,12 +5,13 @@ html(lang="en")
     link(rel="stylesheet", href="/codemirror/lib/codemirror.css")
     link(rel="stylesheet", href="/codemirror/theme/ambiance.css")
     link(rel="stylesheet", href="/css/index.css")
-  body
+  body(data-rc='#{program}')
     .container
         .files
         textarea.editor
             | var express = require('express');
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+    script(src='/socket.io/socket.io.js')
     script(src="/codemirror/lib/codemirror.js")
     script(src="/js/index.js")
 
